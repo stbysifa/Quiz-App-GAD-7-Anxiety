@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GAD-7 Anxiety Questionnaire</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Set font */
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      /* Fade in animation */
+      .fade-in {
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+      /* Dark mode toggle styles */
+      .toggle-checkbox {
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        background-color: white;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      }
+      input:checked + .toggle-background .toggle-checkbox {
+        transform: translateX(1.5rem);
+        background-color: #4f46e5; /* indigo-600 */
+        box-shadow: 0 1px 5px rgb(79 70 229 / 0.7);
+      }
+      .toggle-background {
+        width: 3rem;
+        height: 1.75rem;
+        background-color: #d1d5db; /* gray-300 */
+        border-radius: 9999px;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s ease;
+      }
+      input:checked + .toggle-background {
+        background-color: #4338ca; /* indigo-700 */
+      }
+      #dark-toggle:checked + span {
+        background-color: #4338ca; /* dark-indigo background */
+      }
+      #dark-toggle:checked + span + #toggle-thumb {
+        transform: translateX(1.5rem);
+      }
+      #toggle-thumb {
+        transition: transform 0.3s ease;
+      }
+    </style>
+
+    <!-- Tailwind config for dark mode -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-tr from-blue-100 to-green-100 dark:from-gray-900 dark:to-gray-800 min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-500"
+  >
+    <!-- Dark Mode Toggle Button -->
+    <div
+      class="fixed top-4 right-4 flex items-center space-x-2 z-50 select-none"
+    >
+      <span class="text-gray-700 dark:text-gray-300 text-sm font-medium"
+        >Light</span
+      >
+      <label
+        for="dark-toggle"
+        class="relative inline-block w-12 h-6 cursor-pointer"
+      >
+        <input type="checkbox" id="dark-toggle" class="sr-only" />
+        <span
+          class="block bg-gray-300 dark:bg-gray-600 w-12 h-6 rounded-full transition-colors"
+        ></span>
+        <span
+          class="absolute left-1 top-1 bg-white dark:bg-gray-800 w-4 h-4 rounded-full shadow-md transition-transform"
+          id="toggle-thumb"
+        ></span>
+      </label>
+      <span class="text-gray-700 dark:text-gray-300 text-sm font-medium"
+        >Dark</span
+      >
+    </div>
+
+    <main
+      class="fade-in bg-white dark:bg-gray-900 rounded-lg shadow-lg max-w-3xl w-full p-8 sm:p-12 flex flex-col md:flex-row md:space-x-12"
+    >
+      <!-- Left Content: Form -->
+      <section class="flex-1">
+        <h1
+          class="text-4xl font-bold text-gray-900 dark:text-white mb-6 flex items-center space-x-3"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-10 w-10 text-indigo-600 dark:text-indigo-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12h6m-3-3v6m-6 9v-6a9 9 0 1118 0v6"
+            />
+          </svg>
+          <span
+            >Welcome to the <br /><span
+              class="text-indigo-600 dark:text-indigo-400"
+              >GAD-7 Anxiety Questionnaire</span
+            ></span
+          >
+        </h1>
+
+        <form id="userForm" class="space-y-6" novalidate>
+          <div>
+            <label
+              for="firstName"
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1"
+              >First Name</label
+            >
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              placeholder="John"
+              class="w-full rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-gray-200"
+            />
+          </div>
+
+          <div>
+            <label
+              for="lastName"
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              placeholder="Doe"
+              class="w-full rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-gray-200"
+            />
+          </div>
+
+          <div>
+            <label
+              for="age"
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1"
+              >Age</label
+            >
+            <input
+              type="number"
+              id="age"
+              name="age"
+              min="1"
+              max="120"
+              required
+              placeholder="25"
+              class="w-full rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-gray-200"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-md shadow-md transition duration-300"
+          >
+            Start Questionnaire
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Content: Illustration + Info -->
+      <section
+        class="flex-1 mt-10 md:mt-0 flex flex-col justify-center items-center text-center px-4"
+      >
+        <!-- Inline SVG from unDraw -->
+        <img src="assets/undraw_fall_zh0m.svg" alt="" srcset="" />
+
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900 rounded-lg p-6 border border-indigo-200 dark:border-indigo-700 text-indigo-800 dark:text-indigo-200 shadow mt-6 max-w-md"
+        >
+          <h2 class="text-2xl font-semibold mb-3">About This Application</h2>
+          <p class="text-sm leading-relaxed">
+            This questionnaire is based on the <strong>GAD-7</strong> scale, a
+            validated tool used by healthcare professionals to screen for and
+            measure the severity of generalized anxiety disorder. Your answers
+            will provide insight into your anxiety symptoms over the past two
+            weeks.
+          </p>
+          <p class="mt-3 italic text-sm opacity-80">
+            <strong>Note:</strong> This is not a diagnosis. If you have
+            concerns, please seek advice from a qualified healthcare
+            professional.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer
+      class="mt-12 w-full max-w-3xl px-4 py-6 text-center border-t border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 text-sm"
+    >
+      <p>&copy; 2025 Sifa Tandel. All rights reserved.</p>
+      <div class="mt-2 flex justify-center space-x-6">
+        <a
+          href="https://in.linkedin.com/in/sifa-tandel-28bb48135?trk=public_post_follow-view-profile"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+          aria-label="LinkedIn"
+        >
+          <svg
+            class="w-5 h-5 inline-block"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M4.98 3.5c0 1.381-1.116 2.5-2.49 2.5S0 4.881 0 3.5 1.116 1 2.49 1 4.98 2.119 4.98 3.5zM.5 7h4.98v14H.5V7zm7.57 0h4.78v2.03h.07c.67-1.27 2.3-2.6 4.73-2.6 5.06 0 6 3.33 6 7.66v8.91h-5v-7.88c0-1.88-.03-4.3-2.62-4.3-2.63 0-3.03 2.05-3.03 4.17v8.01h-5V7z"
+            />
+          </svg>
+        </a>
+
+        <a
+          href="https://github.com/stbysifa/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+          aria-label="GitHub"
+        >
+          <svg
+            class="w-5 h-5 inline-block"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.865 8.166 6.839 9.489.5.09.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.893 1.53 2.341 1.088 2.91.832.09-.647.35-1.088.636-1.339-2.22-.253-4.555-1.11-4.555-4.943 0-1.09.39-1.982 1.029-2.679-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844a9.58 9.58 0 012.5.336c1.91-1.294 2.75-1.025 2.75-1.025.546 1.377.202 2.394.1 2.647.64.697 1.028 1.589 1.028 2.679 0 3.842-2.337 4.687-4.566 4.935.36.31.678.921.678 1.856 0 1.338-.012 2.418-.012 2.75 0 .27.18.58.688.482A10.012 10.012 0 0022 12c0-5.52-4.48-10-10-10z"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("dark-toggle");
+      toggle.addEventListener("change", () => {
+        if (toggle.checked) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      });
+
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        toggle.checked = true;
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>
